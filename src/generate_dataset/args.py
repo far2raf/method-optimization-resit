@@ -24,4 +24,4 @@ argument_parser.add_argument("--data_folder", type=str, default="data")
 # Specific
 argument_parser.add_argument("--number_features", type=int)
 argument_parser.add_argument("--number_samples", type=int)
-
+argument_parser.add_argument("--remove_bias", action="store_true")

@@ -16,12 +16,22 @@ def store_dataset(X, y, w, args):
     np.save(f"{path}.npy", w)
 
 
+def generate_X(args):
+    if args.remove_bias:
+        X = scipy.sparse.rand(args.number_samples, args.number_features, density=0.1)  # Size: (num_samples, num_features)
+    else:
+        X = scipy.sparse.rand(args.number_samples, args.number_features - 1, density=0.1)  # Size: (num_samples, num_features)
+        ones = np.ones((args.number_samples, 1))
+        X = scipy.sparse.hstack((X, ones))
+    return X
+
+
 def generate_dataset_poisson_regression(args):
     """
         Generate dataset poisson regression with size like a1a dataset
     """
+    X = generate_X(args)  # Size: (num_samples, num_features)
     w = np.random.rand(args.number_features, 1)
-    X = scipy.sparse.rand(args.number_samples, args.number_features, density=0.1)  # Size: (num_samples, num_features)
     mean_y = X.dot(w)
     y = np.random.poisson(lam=mean_y)  # Size: (number_samples, 1)
     return X, y, w
@@ -31,8 +41,8 @@ def generate_dataset_linear(args):
     """
         Generate simple dataset with linear
     """
+    X = generate_X(args)  # Size: (num_samples, num_features)
     w = np.random.rand(args.number_features, 1)
-    X = scipy.sparse.rand(args.number_samples, args.number_features, density=0.1)  # Size: (num_samples, num_features)
     y = X.dot(w)
     return X, y, w
 
