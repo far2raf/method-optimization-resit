@@ -1,15 +1,16 @@
+# MOCK, generate_data.py has been changed. Should be recheck
 import argparse
 
 argument_parser = argparse.ArgumentParser()
 
-argument_parser.add_argument("--ds_path", type=str, default="../data/like_a1a.svm",
+argument_parser.add_argument("--ds_path", type=str, default="data/like_a1a.svm",
                              help=" path to dataset file in .svm format")
 argument_parser.add_argument("--function_name", type=str, default="poisson_regression")
 
-# method_list = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'sgd'}
-method_list = {'MOCK'}  # MOCK
+# optim_method_list = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'sgd'}
+optim_method_list = {'MOCK'}  # MOCK
 argument_parser.add_argument("--optimize_method", type=str,
-                             help=f"high-level optimization method, will be one of {method_list}.")
+                             help=f"high-level optimization method, will be one of {optim_method_list}.")
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
 line_search_method = {"MOCK"}  # MOCK. maybe should be only brent and set it like default

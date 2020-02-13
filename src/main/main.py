@@ -5,5 +5,7 @@ from src.main.function.function import get_function
 if __name__ == "__main__":
 
     args = argument_parser.parse_args()
-    function = get_function(args.function_name)
+    function = get_function(args)
+    # data = get_data(args)
+    # method = get_method(args)
     pass

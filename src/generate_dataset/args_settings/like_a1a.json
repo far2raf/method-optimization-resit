@@ -1,7 +1,0 @@
-{
-  "number_features": 123,
-  "number_samples": 30956,
-  "function_name": "poisson_regression",
-  "seed": 42,
-  "ds_path": "data/like_a1a.svm"
-}
