@@ -1,8 +1,8 @@
 # MOCK
 
 
-from src.main.optim_methods.base_method_optim import BaseMethodOptim
+from src.main.optim_methods.interface_method_optim import InterfaceMethodOptim
 
 
-class SGD(BaseMethodOptim):
+class SGD(InterfaceMethodOptim):
     pass

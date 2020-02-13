@@ -1,10 +1,10 @@
 # MOCK
 import numpy as np
 
-from src.main.function.base_function import BaseFunction
+from src.main.function.interface_function import InterfaceFunction
 
 
-class PoissonRegression(BaseFunction):
+class PoissonRegression(InterfaceFunction):
 
     # MOCK. should check all shapes
     def _loss(self, X, y, w, l1, l2):

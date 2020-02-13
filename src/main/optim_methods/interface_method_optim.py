@@ -1,7 +1,7 @@
 # MOCK
 
 
-class BaseOptimAnswer:
+class InterfaceOptimAnswer:
 
     # MOCK
     def generate_json(self):
@@ -32,7 +32,7 @@ class BaseOptimAnswer:
         raise RuntimeError("Method should be overridden")
 
 
-class BaseMethodOptim:
+class InterfaceMethodOptim:
 
-    def run(self, X, y, function) -> BaseOptimAnswer:
+    def run(self, X, y, function) -> InterfaceOptimAnswer:
         raise RuntimeError("Method should be overridden")

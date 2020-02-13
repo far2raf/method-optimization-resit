@@ -1,8 +1,8 @@
 # MOCK
-from src.main.function.base_function import BaseFunction
+from src.main.function.interface_function import InterfaceFunction
 
 
-class Linear(BaseFunction):
+class Linear(InterfaceFunction):
 
     # MOCK. Should be checked all shapes
     def _loss(self, X, y, w, l1, l2):

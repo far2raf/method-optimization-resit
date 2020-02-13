@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class BaseFunction:
+class InterfaceFunction:
 
     def function(self):
         raise RuntimeError("Should be overridden")
