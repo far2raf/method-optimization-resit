@@ -1,1 +1,1 @@
-from .common import get_method
+from .common import get_opt_method_maker

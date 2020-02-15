@@ -1,23 +1,57 @@
-# MOCK, generate_data.py has been changed. Should be recheck
 import argparse
+import json
+import os
+
+
+def load_args_settings(args):
+    argparse_dict = vars(args)
+    path = os.path.abspath(f"{args.args_settings_folder}/{args.function_name}-{args.optim_method}.json")
+    _json = json.load(open(path, "r"))
+    argparse_dict.update(_json)
+
 
 argument_parser = argparse.ArgumentParser()
 
-argument_parser.add_argument("--ds_path", type=str, default="data/like_a1a.svm",
-                             help=" path to dataset file in .svm format")
-argument_parser.add_argument("--function_name", type=str, default="poisson_regression")
+# args settings
+argument_parser.add_argument("--no_use_save_args_settings", action="store_true")
+argument_parser.add_argument("--args_settings_folder", type=str, default="src/main/args_settings")
+
+# common
+argument_parser.add_argument("--data_folder", type=str, default="data")
+argument_parser.add_argument("--seed", type=int, default=42)
+argument_parser.add_argument("--function_name", type=str, default="linear")
+# default="poisson_regression")
 
 # optim_method_list = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'sgd'}
-optim_method_list = {'MOCK'}  # MOCK
-argument_parser.add_argument("--optimize_method", type=str,
-                             help=f"high-level optimization method, will be one of {optim_method_list}.")
+optim_methods = {'gradient'}  # MOCK
+argument_parser.add_argument("--optim_method",
+                             type=str,
+                             help=f"high-level optimization method, will be one of {optim_methods}.",
+                             choices=optim_methods,
+                             default="gradient"  # MOCK. should be deleted
+                             )
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
-line_search_method = {"MOCK"}  # MOCK. maybe should be only brent and set it like default
+line_search_methods = {"MOCK"}  # MOCK. maybe should be only brent and set it like default
 argument_parser.add_argument("--line_search",
                              type=str,
-                             help=f"linear optimization method, will be one of {line_search_method}" +
+                             help=f"linear optimization method, will be one of {line_search_methods}" +
                                   f"Note that you don't have to support a combination of 'newton' nor 'hfn' nor any 'bfgs' optimization method and 'lipschitz' linear search.")
+
+
+# eps stop condition
+eps_stop_condition_methods = {"none", "eps_between_param"}
+argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str, default="none")
+argument_parser.add_argument("--eps_stop_condition", type=float, default=0.01)
+
+# iter stop condition
+argument_parser.add_argument("--no_use_num_stop_condition", action="store_true")
+argument_parser.add_argument("--max_num_iter", type=int)
+argument_parser.add_argument("--no_use_tqdm", action="store_true")
+
+
+# Gradient descent
+argument_parser.add_argument("--lr", type=float, default=0.001, help="lr for gradient descent")
 
 # MOCK
 # --point_distribution: string; initial weights distribution class, will be one of {'uniform', 'gaussian'}. In case of uniform its parameters must be (-1, 1) and in case of gaussian its parameters must be (0, $\sqrt{10}$).

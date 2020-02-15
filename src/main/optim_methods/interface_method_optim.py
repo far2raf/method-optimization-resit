@@ -1,22 +1,31 @@
 # MOCK
+import numpy as np
+
+from src.main.functions.interface_function import InterfaceFunction
+from src.main.stop_conditions.common import InterfaceStopCondition
 
 
 class InterfaceOptimAnswer:
 
-    # MOCK
+    def __init__(self, initial_point, optimal_point, func: InterfaceFunction) -> None:
+        super().__init__()
+        self._func = func
+        self._optimal_point = optimal_point
+        self._initial_point = initial_point
+
     def generate_json(self):
-        pass
+        raise RuntimeError("MOCK")
 
     def get_initial_point(self):
-        raise RuntimeError("Method should be overridden")
+        return self._initial_point
 
     def get_optimal_point(self):
+        return self._optimal_point
+
+    def get_loss_value(self):
         raise RuntimeError("Method should be overridden")
 
-    def get_func_value(self):
-        raise RuntimeError("Method should be overridden")
-
-    def get_gradient_value(self):
+    def get_gradient_loss_value(self):
         raise RuntimeError("Method should be overridden")
 
     def get_stopping_criterian(self):
@@ -34,5 +43,22 @@ class InterfaceOptimAnswer:
 
 class InterfaceMethodOptim:
 
-    def run(self, X, y, function) -> InterfaceOptimAnswer:
+    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition):
+        assert len(X.shape) == 2
+        num_of_samples, num_of_features = X.shape
+        assert y.shape == (num_of_samples, 1)
+        self._X = X.copy()
+        self._y = y.copy()
+        self._function = function
+        self._stop_condition = stop_condition
+        self._w_start = np.random.rand(num_of_features, 1)
+        self._w = self._w_start.copy()
+
+    def run(self) -> InterfaceOptimAnswer:
+        raise RuntimeError("Method should be overridden")
+
+    def step(self):
+        raise RuntimeError("Method should be overridden")
+
+    def get_answer(self):
         raise RuntimeError("Method should be overridden")
