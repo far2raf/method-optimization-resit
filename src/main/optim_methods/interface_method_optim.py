@@ -55,7 +55,9 @@ class InterfaceMethodOptim:
         self._w = self._w_start.copy()
 
     def run(self) -> InterfaceOptimAnswer:
-        raise RuntimeError("Method should be overridden")
+        while not self._stop_condition.check(self._w):
+            self.step()
+        return self.get_answer()
 
     def step(self):
         raise RuntimeError("Method should be overridden")

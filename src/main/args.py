@@ -22,13 +22,13 @@ argument_parser.add_argument("--seed", type=int, default=42)
 argument_parser.add_argument("--function_name", type=str, default="linear")
 # default="poisson_regression")
 
-# optim_method_list = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'sgd'}
-optim_methods = {'gradient'}  # MOCK
+optim_methods = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'adam'}
 argument_parser.add_argument("--optim_method",
                              type=str,
                              help=f"high-level optimization method, will be one of {optim_methods}.",
                              choices=optim_methods,
-                             default="gradient"  # MOCK. should be deleted
+                             # default="gradient"  # MOCK. should be deleted
+                             default="newton"  # MOCK. should be deleted
                              )
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
