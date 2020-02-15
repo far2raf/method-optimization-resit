@@ -55,7 +55,7 @@ class InterfaceMethodOptim:
         self._w = self._w_start.copy()
 
     def run(self) -> InterfaceOptimAnswer:
-        while not self._stop_condition.check(self._w):
+        while not self._stop_condition.finish(self._w):
             self.step()
         return self.get_answer()
 

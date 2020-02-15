@@ -28,8 +28,9 @@ argument_parser.add_argument("--optim_method",
                              help=f"high-level optimization method, will be one of {optim_methods}.",
                              choices=optim_methods,
                              # default="gradient"  # MOCK. should be deleted
-                             default="newton"  # MOCK. should be deleted
-                             )
+                             # default="newton"
+                             default="hfn"
+)
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
 line_search_methods = {"MOCK"}  # MOCK. maybe should be only brent and set it like default
@@ -41,7 +42,7 @@ argument_parser.add_argument("--line_search",
 
 # eps stop condition
 eps_stop_condition_methods = {"none", "eps_between_param"}
-argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str, default="none")
+argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str, default="eps_between_param")
 argument_parser.add_argument("--eps_stop_condition", type=float, default=0.01)
 
 # iter stop condition

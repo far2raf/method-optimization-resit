@@ -69,7 +69,9 @@ class InterfaceFunction:
 
     def _loss_gradient_regularization_part(self, w):
         shape = w.shape[0]
-        l1_part = w / np.abs(w) / shape # MOCK if w == 0
+        # MOCK. better way with l1 is written in telegram
+        # l1_part = w / np.abs(w) / shape # MOCK if w == 0
+        l1_part = np.sign(w) / shape
         l2_part = 2 * w / shape ** 2
         return self._l1 * l1_part + self._l2 * l2_part
 

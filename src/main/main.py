@@ -14,8 +14,13 @@ if __name__ == "__main__":
     np.random.seed(args.seed)
 
     X, y, w = load_dataset(args)
+    S, F = X.shape
+    y = y.reshape((S, 1))
+    assert y.shape == (S, 1)
+    assert w.shape == (F, 1)
+
     function = get_function(args)
-    stop_condition = get_stop_condition(args)
+    stop_condition = get_stop_condition(args, F)
     opt_method_maker = get_opt_method_maker(args)
     opt_method = opt_method_maker(X, y.reshape((-1, 1)), function, stop_condition)
     answer = opt_method.run()
