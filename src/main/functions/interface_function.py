@@ -73,9 +73,9 @@ class InterfaceFunction:
         # l1_part = w / np.abs(w) / shape # MOCK if w == 0
         l1_part = np.sign(w) / shape
         l2_part = 2 * w / shape ** 2
-        return self._l1 * l1_part + self._l2 * l2_part
+        return self._l1 * l1_part + self._l2 / 2 * l2_part
 
     def _loss_hessian_regularization_part(self, w):
         shape = w.shape[0]
-        l2_part = np.ones((shape, shape)) / shape ** 2
-        return self._l2 * l2_part
+        l2_part = 2 * np.ones((shape, shape)) / shape ** 2
+        return self._l2 / 2 * l2_part

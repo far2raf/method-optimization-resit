@@ -19,17 +19,17 @@ argument_parser.add_argument("--args_settings_folder", type=str, default="src/ma
 # common
 argument_parser.add_argument("--data_folder", type=str, default="data")
 argument_parser.add_argument("--seed", type=int, default=42)
-argument_parser.add_argument("--function_name", type=str, default="linear")
-# default="poisson_regression")
+argument_parser.add_argument("--function_name", type=str, # default="linear")
+default="poisson_regression")
 
 optim_methods = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'adam'}
 argument_parser.add_argument("--optim_method",
                              type=str,
                              help=f"high-level optimization method, will be one of {optim_methods}.",
                              choices=optim_methods,
-                             # default="gradient"  # MOCK. should be deleted
+                             default="gradient"  # MOCK. should be deleted
                              # default="newton"
-                             default="hfn"
+                             # default="hfn"
 )
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
@@ -43,7 +43,7 @@ argument_parser.add_argument("--line_search",
 # eps stop condition
 eps_stop_condition_methods = {"none", "eps_between_param"}
 argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str, default="eps_between_param")
-argument_parser.add_argument("--eps_stop_condition", type=float, default=0.01)
+argument_parser.add_argument("--eps_stop_condition", type=float, default=0.00001)
 
 # iter stop condition
 argument_parser.add_argument("--no_use_num_stop_condition", action="store_true")

@@ -5,23 +5,34 @@ from src.main.functions.interface_function import InterfaceFunction
 
 
 class PoissonRegression(InterfaceFunction):
-    pass
+    def _function(self, w, X):
+        mean = np.exp(X.dot(w))
+        return np.random.poisson(mean)
 
-    # MOCK. should check all shapes
-    # def _loss(self, w, X, y, l1, l2):
-    #     """
-    #
-    #    :param X: Size: (num_samples, num_features)
-    #    :param y: Size: (num_samples, 1)
-    #    :param w: Size: (num_features, 1)
-    #    :param l1: float
-    #    :param l2: float
-    #    :return:
-    #    """
-    #     mean_y = X.dot(w)  # (num_samples, 1)
-    #     second = np.exp(mean_y)  # (num_samples, 1)
-    #     first = y * mean_y  # (num_samples, 1)
-    #     main = (second - first).mean()
-    #
-    #     total = main + self._loss_regularization_part(w, l1, l2)
-    #     return total
+    def _loss(self, w, X, y):
+        S, F = X.shape
+        xw = X.dot(w)
+        first = y.T.dot(xw)
+        exp_part = np.exp(xw)
+        second = np.ones((S, 1)).T.dot(exp_part)
+        main = (first - second) / S
+        total = main + self._loss_regularization_part(w)
+        return total
+
+    def _loss_gradient(self, w, X, y):
+        S, F = X.shape
+        xw = X.dot(w)
+        exp_part = np.exp(xw)
+        diff = y - exp_part
+        main = 1 / S * X.T.dot(diff)
+        total = main + self._loss_gradient_regularization_part(w)
+        return total
+
+    def _loss_hessian(self, w, X, y):
+        xw = X.dot(w)
+        exp_part = np.exp(xw)
+        # MOCK should be checked
+        M = np.diag(exp_part) # (S, S)
+        main = X.t.dot(M).dot(X)
+        total = main + self._loss_hessian_regularization_part(w)
+        return total
