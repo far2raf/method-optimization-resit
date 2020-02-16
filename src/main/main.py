@@ -26,4 +26,5 @@ if __name__ == "__main__":
     answer = opt_method.run()
 
     print(f"Sum of square diff: {round(((answer.get_optimal_point() - w) ** 2).sum(), 6)}")
+    print(f"Loss: {round(function.loss(answer.get_optimal_point(), X, y).item(), 6)}")
     # print(f"Diff between true and optim: \n {answer.get_optimal_point() - w}")

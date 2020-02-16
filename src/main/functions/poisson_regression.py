@@ -5,6 +5,12 @@ from src.main.functions.interface_function import InterfaceFunction
 
 
 class PoissonRegression(InterfaceFunction):
+    def __init__(self):
+        super().__init__()
+        # В формулах в задании и на вики почему-то максимизирует loss
+        # Для наглядности сделан специальный параметр меняющий выражения для минимизации
+        self._maximization_to_minimization = -1
+
     def _function(self, w, X):
         mean = np.exp(X.dot(w))
         return np.random.poisson(mean)
@@ -16,7 +22,7 @@ class PoissonRegression(InterfaceFunction):
         exp_part = np.exp(xw)
         second = np.ones((S, 1)).T.dot(exp_part)
         main = (first - second) / S
-        total = main + self._loss_regularization_part(w)
+        total = self._maximization_to_minimization * main + self._loss_regularization_part(w)
         return total
 
     def _loss_gradient(self, w, X, y):
@@ -25,7 +31,7 @@ class PoissonRegression(InterfaceFunction):
         exp_part = np.exp(xw)
         diff = y - exp_part
         main = 1 / S * X.T.dot(diff)
-        total = main + self._loss_gradient_regularization_part(w)
+        total = self._maximization_to_minimization * main + self._loss_gradient_regularization_part(w)
         return total
 
     def _loss_hessian(self, w, X, y):
@@ -34,5 +40,5 @@ class PoissonRegression(InterfaceFunction):
         # MOCK should be checked
         M = np.diag(exp_part) # (S, S)
         main = X.t.dot(M).dot(X)
-        total = main + self._loss_hessian_regularization_part(w)
+        total = self._maximization_to_minimization * main + self._loss_hessian_regularization_part(w)
         return total
