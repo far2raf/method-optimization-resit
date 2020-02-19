@@ -1,6 +1,6 @@
+import numpy as np
 import scipy
 from sklearn import datasets
-import numpy as np
 
 
 def load_dataset(args):

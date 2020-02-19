@@ -4,7 +4,7 @@ from src.generate_dataset.dataset_processing import load_dataset
 from src.main.args import argument_parser, load_args_settings
 from src.main.functions.common import get_function
 from src.main.optim_methods import get_opt_method_maker
-from src.main.stop_conditions.common import NumIterStopCondition, get_stop_condition
+from src.main.stop_conditions.common import get_stop_condition
 
 if __name__ == "__main__":
 
