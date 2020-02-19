@@ -1,5 +1,3 @@
-import numpy as np
-
 from src.main.optim_methods.interface_method_optim import InterfaceMethodOptim, InterfaceOptimAnswer
 from src.main.stop_conditions.common import InterfaceStopCondition, NumIterStopCondition, EpsBetweenParamStopCondition, \
     OrStopCondition
