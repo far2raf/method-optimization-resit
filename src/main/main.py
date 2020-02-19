@@ -5,6 +5,7 @@ from src.main.args import argument_parser, load_args_settings
 from src.main.functions.common import get_function
 from src.main.optim_methods import get_opt_method_maker
 from src.main.stop_conditions.common import get_stop_condition
+from torch.utils.tensorboard import SummaryWriter
 
 if __name__ == "__main__":
 
@@ -18,12 +19,12 @@ if __name__ == "__main__":
     y = y.reshape((S, 1))
     assert y.shape == (S, 1)
     assert w.shape == (F, 1)
-
-    function = get_function(args)
-    stop_condition = get_stop_condition(args, F)
-    opt_method_maker = get_opt_method_maker(args)
-    opt_method = opt_method_maker(X, y.reshape((-1, 1)), function, stop_condition)
-    answer = opt_method.run()
+    with SummaryWriter(log_dir=f'runs/{args.function_name}-{args.optim_method}', purge_step=0) as writer:
+        function = get_function(args)
+        stop_condition = get_stop_condition(args, F)
+        opt_method_maker = get_opt_method_maker(args, writer)
+        opt_method = opt_method_maker(X, y.reshape((-1, 1)), function, stop_condition)
+        answer = opt_method.run()
 
     print(f"Sum of square diff: {round(((answer.get_optimal_point() - w) ** 2).sum(), 6)}")
     print(f"Loss: {round(function.loss(answer.get_optimal_point(), X, y).item(), 6)}")

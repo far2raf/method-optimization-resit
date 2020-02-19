@@ -43,7 +43,7 @@ class InterfaceOptimAnswer:
 
 class InterfaceMethodOptim:
 
-    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition):
+    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition, tensorboard_writer):
         assert len(X.shape) == 2
         num_of_samples, num_of_features = X.shape
         assert y.shape == (num_of_samples, 1)
@@ -54,13 +54,22 @@ class InterfaceMethodOptim:
         self._w_start = np.random.rand(num_of_features, 1)
         self._w = self._w_start.copy()
 
+        # For tensorboard
+        self._tensorboard_writer = tensorboard_writer
+        self._learning_step = 0
+
     def run(self) -> InterfaceOptimAnswer:
         while not self._stop_condition.finish(self._w):
             self.step()
+            self._learning_step += 1
         return self.get_answer()
+
 
     def step(self):
         raise RuntimeError("Method should be overridden")
 
     def get_answer(self):
+        raise RuntimeError("Method should be overridden")
+
+    def _name(self):
         raise RuntimeError("Method should be overridden")

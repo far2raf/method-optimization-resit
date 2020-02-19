@@ -3,13 +3,13 @@ from src.main.optim_methods.hessian_free_newton import HessianFreeNewton
 from src.main.optim_methods.newton import Newton
 
 
-def get_opt_method_maker(args):
+def get_opt_method_maker(args, tensorboard_writer):
     name = args.optim_method
     if name == "gradient":
-        return lambda *grad_args: GradientDescent(*grad_args)
+        return lambda *args: GradientDescent(*args, tensorboard_writer=tensorboard_writer)
     elif name == "newton":
-        return Newton
+        return lambda *args: Newton(*args, tensorboard_writer=tensorboard_writer)
     elif name == "hfn":
-        return HessianFreeNewton
+        return lambda *args: HessianFreeNewton(*args, tensorboard_writer=tensorboard_writer)
     else:
         raise RuntimeError(f"Optim method {name} undefined")

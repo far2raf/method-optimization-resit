@@ -8,8 +8,8 @@ from src.main.stop_conditions.common import InterfaceStopCondition
 
 class GradientDescent(InterfaceMethodOptim):
 
-    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition):
-        super().__init__(X, y, function, stop_condition)
+    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition, *args, **kwargs):
+        super().__init__(X, y, function, stop_condition, *args, **kwargs)
 
     def step(self):
         grad = self._function.loss_gradient(self._w, self._X, self._y)
@@ -18,6 +18,7 @@ class GradientDescent(InterfaceMethodOptim):
         # May be there bounds write like BAD SMELL
         res = scipy.optimize.minimize_scalar(optim_func, method="bounded", bounds=(0, 1))
         lr = res['x']
+        self._tensorboard_writer.add_scalar('lr', lr, self._learning_step)
         self._w -= lr * grad
 
     def get_answer(self):
