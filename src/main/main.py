@@ -26,6 +26,7 @@ if __name__ == "__main__":
         opt_method = opt_method_maker(X, y.reshape((-1, 1)), function, stop_condition)
         answer = opt_method.run()
 
+    print(f"Loss from generated data: {round(function.loss(w, X, y).item(), 6)}")
+    print(f"Loss from method: {round(function.loss(answer.get_optimal_point(), X, y).item(), 6)}")
     print(f"Sum of square diff: {round(((answer.get_optimal_point() - w) ** 2).sum(), 6)}")
-    print(f"Loss: {round(function.loss(answer.get_optimal_point(), X, y).item(), 6)}")
     # print(f"Diff between true and optim: \n {answer.get_optimal_point() - w}")

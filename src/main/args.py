@@ -20,8 +20,8 @@ argument_parser.add_argument("--args_settings_folder", type=str, default="src/ma
 argument_parser.add_argument("--data_folder", type=str, default="data")
 argument_parser.add_argument("--seed", type=int, default=42)
 argument_parser.add_argument("--function_name", type=str,
-                             # default="linear"
-                             default="poisson_regression"
+                             default="linear"
+                             # default="poisson_regression"
                              )
 
 optim_methods = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'adam'}
@@ -44,16 +44,13 @@ argument_parser.add_argument("--line_search",
 # eps stop condition
 eps_stop_condition_methods = {"none", "eps_between_param"}
 argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str,
-                             default="eps_between_param")
+                             default="none")
 argument_parser.add_argument("--eps_stop_condition", type=float, default=0.00001)
 
 # iter stop condition
 argument_parser.add_argument("--no_use_num_stop_condition", action="store_true")
 argument_parser.add_argument("--max_num_iter", type=int)
 argument_parser.add_argument("--no_use_tqdm", action="store_true")
-
-# Gradient descent
-argument_parser.add_argument("--lr", type=float, default=0.001, help="lr for gradient descent")
 
 # MOCK
 # --point_distribution: string; initial weights distribution class, will be one of {'uniform', 'gaussian'}. In case of uniform its parameters must be (-1, 1) and in case of gaussian its parameters must be (0, $\sqrt{10}$).

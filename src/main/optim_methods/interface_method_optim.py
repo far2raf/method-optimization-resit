@@ -1,5 +1,5 @@
-# MOCK
 import numpy as np
+from torch.utils.tensorboard import SummaryWriter
 
 from src.main.functions.interface_function import InterfaceFunction
 from src.main.stop_conditions.common import InterfaceStopCondition
@@ -43,7 +43,10 @@ class InterfaceOptimAnswer:
 
 class InterfaceMethodOptim:
 
-    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition, tensorboard_writer):
+    def __init__(self, X, y,
+                 function: InterfaceFunction,
+                 stop_condition: InterfaceStopCondition,
+                 tensorboard_writer: SummaryWriter):
         assert len(X.shape) == 2
         num_of_samples, num_of_features = X.shape
         assert y.shape == (num_of_samples, 1)
