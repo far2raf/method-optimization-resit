@@ -19,8 +19,10 @@ argument_parser.add_argument("--args_settings_folder", type=str, default="src/ma
 # common
 argument_parser.add_argument("--data_folder", type=str, default="data")
 argument_parser.add_argument("--seed", type=int, default=42)
-argument_parser.add_argument("--function_name", type=str, # default="linear")
-default="poisson_regression")
+argument_parser.add_argument("--function_name", type=str,
+                             # default="linear"
+                             default="poisson_regression"
+                             )
 
 optim_methods = {'gradient', 'newton', 'hfn', 'bfgs', 'lbfgs', 'l1prox', 'adam'}
 argument_parser.add_argument("--optim_method",
@@ -30,7 +32,7 @@ argument_parser.add_argument("--optim_method",
                              default="gradient"  # MOCK. should be deleted
                              # default="newton"
                              # default="hfn"
-)
+                             )
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
 line_search_methods = {"MOCK"}  # MOCK. maybe should be only brent and set it like default
@@ -39,17 +41,16 @@ argument_parser.add_argument("--line_search",
                              help=f"linear optimization method, will be one of {line_search_methods}" +
                                   f"Note that you don't have to support a combination of 'newton' nor 'hfn' nor any 'bfgs' optimization method and 'lipschitz' linear search.")
 
-
 # eps stop condition
 eps_stop_condition_methods = {"none", "eps_between_param"}
-argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str, default="eps_between_param")
+argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str,
+                             default="eps_between_param")
 argument_parser.add_argument("--eps_stop_condition", type=float, default=0.00001)
 
 # iter stop condition
 argument_parser.add_argument("--no_use_num_stop_condition", action="store_true")
 argument_parser.add_argument("--max_num_iter", type=int)
 argument_parser.add_argument("--no_use_tqdm", action="store_true")
-
 
 # Gradient descent
 argument_parser.add_argument("--lr", type=float, default=0.001, help="lr for gradient descent")

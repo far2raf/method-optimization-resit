@@ -1,4 +1,4 @@
 {
-  "number_features": 2,
-  "number_samples": 10
+  "number_features": 20,
+  "number_samples": 10000
 }

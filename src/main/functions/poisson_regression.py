@@ -1,5 +1,5 @@
-# MOCK
 import numpy as np
+import scipy
 
 from src.main.functions.interface_function import InterfaceFunction
 
@@ -38,7 +38,7 @@ class PoissonRegression(InterfaceFunction):
         xw = X.dot(w)
         exp_part = np.exp(xw)
         # MOCK should be checked
-        M = np.diag(exp_part) # (S, S)
-        main = X.t.dot(M).dot(X)
+        M = scipy.sparse.diags([exp_part.view().reshape(-1)], [0]) # (S, S)
+        main = X.T.dot(M).dot(X)
         total = self._maximization_to_minimization * main + self._loss_hessian_regularization_part(w)
         return total

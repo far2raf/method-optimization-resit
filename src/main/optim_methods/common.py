@@ -6,7 +6,7 @@ from src.main.optim_methods.newton import Newton
 def get_opt_method_maker(args):
     name = args.optim_method
     if name == "gradient":
-        return lambda *grad_args: GradientDescent(*grad_args, lr=args.lr)
+        return lambda *grad_args: GradientDescent(*grad_args)
     elif name == "newton":
         return Newton
     elif name == "hfn":
