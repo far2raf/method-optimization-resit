@@ -33,7 +33,7 @@ def generate_dataset_poisson_regression(args):
     X = generate_X(args)  # Size: (num_samples, num_features)
     w = np.random.rand(args.number_features, 1)
     mean_y = X.dot(w)
-    y = np.random.poisson(lam=mean_y)  # Size: (number_samples, 1)
+    y = np.random.poisson(lam=np.exp(mean_y))  # Size: (number_samples, 1)
     return X, y, w
 
 

@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 
 from src.generate_dataset.dataset_processing import load_dataset
@@ -12,6 +14,7 @@ if __name__ == "__main__":
     args = argument_parser.parse_args()
     if not args.no_use_save_args_settings:
         load_args_settings(args)
+    random.seed(args.seed)
     np.random.seed(args.seed)
 
     X, y, w = load_dataset(args)
@@ -19,9 +22,11 @@ if __name__ == "__main__":
     y = y.reshape((S, 1))
     assert y.shape == (S, 1)
     assert w.shape == (F, 1)
+
+    function = get_function(args)
+    stop_condition = get_stop_condition(args, F)
+
     with SummaryWriter(log_dir=f'runs/{args.function_name}-{args.optim_method}', purge_step=0) as writer:
-        function = get_function(args)
-        stop_condition = get_stop_condition(args, F)
         opt_method_maker = get_opt_method_maker(args, writer)
         opt_method = opt_method_maker(X, y.reshape((-1, 1)), function, stop_condition)
         answer = opt_method.run()
