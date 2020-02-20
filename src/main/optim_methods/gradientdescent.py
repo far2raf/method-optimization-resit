@@ -1,10 +1,7 @@
-import scipy
-import scipy.optimize
-
 from src.main.functions.interface_function import InterfaceFunction
 from src.main.optim_methods.interface_method_optim import InterfaceMethodOptim, InterfaceOptimAnswer
+from src.main.optim_methods.utils import get_lr
 from src.main.stop_conditions.common import InterfaceStopCondition
-import numpy as np
 
 
 class GradientDescent(InterfaceMethodOptim):
@@ -15,11 +12,10 @@ class GradientDescent(InterfaceMethodOptim):
     def step(self):
         grad = self._function.loss_gradient(self._w, self._X, self._y)
         assert grad.shape == self._w.shape
-        optim_func = lambda dw: self._function.loss(self._w - dw * grad, self._X, self._y)
         # May be there bounds write like BAD SMELL
-        res = scipy.optimize.minimize_scalar(optim_func, method="bounded", bounds=(0, 1))
-        lr = res['x']
-        self._w -= lr * grad
+        direction = grad
+        lr = get_lr(self._w, direction, self._X, self._y, self._function, max_bound=1)
+        self._w -= lr * direction
         self._tensorboard_part(lr)
 
 

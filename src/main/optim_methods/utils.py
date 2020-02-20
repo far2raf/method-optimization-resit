@@ -1,7 +1,7 @@
 import scipy.optimize
 
 
-def get_lr(w, direction, X, y, function, max_bound):
+def get_lr(w, direction, X, y, function, *args, max_bound):
     # MOCK. BUG: here sometimes lr becomes ndarray, not float
     def optim_func(lr: float) -> float:
         return function.loss(w - lr * direction, X, y)
