@@ -18,7 +18,5 @@ class GradientDescent(InterfaceMethodOptim):
         self._w -= lr * direction
         self._tensorboard_part(lr)
 
-
     def get_answer(self):
         return InterfaceOptimAnswer(self._w_start, self._w, self._function)
-

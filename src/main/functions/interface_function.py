@@ -2,7 +2,6 @@ import numpy as np
 
 
 class InterfaceFunction:
-
     """
         F - number_of_features
         S - number_of_samples

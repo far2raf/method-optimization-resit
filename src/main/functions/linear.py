@@ -3,7 +3,6 @@ from src.main.functions.interface_function import InterfaceFunction
 
 class Linear(InterfaceFunction):
 
-
     def __init__(self):
         super().__init__()
 

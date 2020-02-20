@@ -67,7 +67,6 @@ class InterfaceMethodOptim:
             self._learning_step += 1
         return self.get_answer()
 
-
     def step(self):
         raise RuntimeError("Method should be overridden")
 

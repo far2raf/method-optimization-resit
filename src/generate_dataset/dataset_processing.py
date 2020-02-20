@@ -18,9 +18,11 @@ def store_dataset(X, y, w, args):
 
 def generate_X(args):
     if args.remove_bias:
-        X = scipy.sparse.rand(args.number_samples, args.number_features, density=0.1)  # Size: (num_samples, num_features)
+        X = scipy.sparse.rand(args.number_samples, args.number_features,
+                              density=0.1)  # Size: (num_samples, num_features)
     else:
-        X = scipy.sparse.rand(args.number_samples, args.number_features - 1, density=0.1)  # Size: (num_samples, num_features)
+        X = scipy.sparse.rand(args.number_samples, args.number_features - 1,
+                              density=0.1)  # Size: (num_samples, num_features)
         ones = np.ones((args.number_samples, 1))
         X = scipy.sparse.hstack((X, ones))
     return X
