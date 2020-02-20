@@ -76,3 +76,9 @@ class InterfaceMethodOptim:
 
     def _name(self):
         raise RuntimeError("Method should be overridden")
+
+    def _tensorboard_part(self, lr):
+        # For RELEASE version should be deleted
+        self._tensorboard_writer.add_scalar('lr', lr, self._learning_step)
+        loss = self._function.loss(self._w, self._X, self._y)
+        self._tensorboard_writer.add_scalar('loss', loss, self._learning_step)

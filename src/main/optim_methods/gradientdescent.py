@@ -20,11 +20,8 @@ class GradientDescent(InterfaceMethodOptim):
         res = scipy.optimize.minimize_scalar(optim_func, method="bounded", bounds=(0, 1))
         lr = res['x']
         self._w -= lr * grad
+        self._tensorboard_part(lr)
 
-        # Tensorboard part
-        self._tensorboard_writer.add_scalar('lr', lr, self._learning_step)
-        loss = self._function.loss(self._w, self._X, self._y)
-        self._tensorboard_writer.add_scalar('loss', loss, self._learning_step)
 
     def get_answer(self):
         return InterfaceOptimAnswer(self._w_start, self._w, self._function)

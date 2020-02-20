@@ -1,4 +1,4 @@
 {
-  "max_num_iter": 1000,
+  "max_num_iter": 200,
   "type_of_eps_stop_condition": "none"
 }
