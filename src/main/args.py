@@ -29,8 +29,8 @@ argument_parser.add_argument("--optim_method",
                              type=str,
                              help=f"high-level optimization method, will be one of {optim_methods}.",
                              choices=optim_methods,
-                             # default="gradient"  # MOCK. should be deleted
-                             default="newton"
+                             default="gradient"  # MOCK. should be deleted
+                             # default="newton"
                              # default="hfn"
                              )
 
