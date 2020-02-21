@@ -32,7 +32,11 @@ argument_parser.add_argument("--optim_method",
                              default="gradient"  # MOCK. should be deleted
                              # default="newton"
                              # default="hfn"
-                             )
+                             # default="bfgs"
+                             # default="lbfgs"
+                             # default="adam"
+                             # default="l1prox"
+)
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
 line_search_methods = {"MOCK"}  # MOCK. maybe should be only brent and set it like default
@@ -51,6 +55,10 @@ argument_parser.add_argument("--eps_stop_condition", type=float, default=0.00001
 argument_parser.add_argument("--no_use_num_stop_condition", action="store_true")
 argument_parser.add_argument("--max_num_iter", type=int)
 argument_parser.add_argument("--no_use_tqdm", action="store_true")
+
+
+argument_parser.add_argument("--lbfgs-history-size", type=int, default=0,
+                             help="optional for L-BFGS method; number of entries in history.")
 
 # MOCK
 # --point_distribution: string; initial weights distribution class, will be one of {'uniform', 'gaussian'}. In case of uniform its parameters must be (-1, 1) and in case of gaussian its parameters must be (0, $\sqrt{10}$).
