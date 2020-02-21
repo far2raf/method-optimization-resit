@@ -14,7 +14,7 @@ class HessianFreeNewton(InterfaceMethodOptim):
         assert hessian.shape == (F, F)
         assert self._w.shape == (F, 1)
 
-        direction = self._cg(grad, hessian, self._w)
+        direction = self._direction(grad, hessian, self._w)
 
         # BAD SMELL, max_bound like magic const
         lr = get_lr(self._w, direction, self._X, self._y, self._function, max_bound=1000)
@@ -29,7 +29,7 @@ class HessianFreeNewton(InterfaceMethodOptim):
     def _get_stop_condition(self, F) -> InterfaceStopCondition:
         return NumIterStopCondition(F)
 
-    def _cg(self, grad, hessian, w_start):
+    def _direction(self, grad, hessian, w_start):
         """
         solve Ax = b
         https://habr.com/ru/post/350794/
