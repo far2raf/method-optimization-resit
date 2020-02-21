@@ -12,8 +12,8 @@ class InterfaceFunction:
 
     def __init__(self):
         # BAD SMELL
-        self._l1 = 0
-        self._l2 = 0
+        self._l1 = 0.0
+        self._l2 = 0.0
 
     def function(self, w, X):
         assert len(X.shape) != 2

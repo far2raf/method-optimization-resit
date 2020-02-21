@@ -1,6 +1,8 @@
+import numpy as np
+
 from src.main.optim_methods.interface_method_optim import InterfaceMethodOptim, InterfaceOptimAnswer
-from src.main.stop_conditions.common import InterfaceStopCondition, NumIterStopCondition, EpsBetweenParamStopCondition, \
-    OrStopCondition
+from src.main.optim_methods.utils import get_lr
+from src.main.stop_conditions.common import InterfaceStopCondition, NumIterStopCondition
 
 
 class HessianFreeNewton(InterfaceMethodOptim):
@@ -11,15 +13,21 @@ class HessianFreeNewton(InterfaceMethodOptim):
         hessian = self._function.loss_hessian(self._w, self._X, self._y)
         assert hessian.shape == (F, F)
         assert self._w.shape == (F, 1)
-        self._w -= self._cg(grad, hessian, self._w)
+
+        direction = self._cg(grad, hessian, self._w)
+
+        # BAD SMELL, max_bound like magic const
+        lr = get_lr(self._w, direction, self._X, self._y, self._function, max_bound=1000)
+        self._w -= lr * direction
+
+        self._tensorboard_part(lr)
 
     def get_answer(self):
         return InterfaceOptimAnswer(self._w_start, self._w, self._function)
 
-    def _get_stop_condition(self, F, eps=0.001) -> InterfaceStopCondition:
-        eps_condition = EpsBetweenParamStopCondition(eps, F)
-        iter_condition = NumIterStopCondition(F)
-        return OrStopCondition((eps_condition, iter_condition))
+    # MOCK. may be should be rewritten
+    def _get_stop_condition(self, F) -> InterfaceStopCondition:
+        return NumIterStopCondition(F)
 
     def _cg(self, grad, hessian, w_start):
         """
@@ -36,7 +44,7 @@ class HessianFreeNewton(InterfaceMethodOptim):
         assert hessian.shape == (F, F)
         assert w_start.shape == (F, 1)
         A = hessian.copy()
-        x = w_start.copy()
+        x = np.random.rand(F, 1)
         b = grad.copy()
         r = b - A.dot(x)  # residual
         d = r  # search direction
