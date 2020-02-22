@@ -1,17 +1,14 @@
 import numpy as np
 import scipy.optimize
-from torch.utils.tensorboard import SummaryWriter
 
-from src.main.functions.interface_function import InterfaceFunction
 from src.main.optim_methods.interface_method_optim import InterfaceMethodOptim, InterfaceOptimAnswer
 from src.main.stop_conditions.common import NumIterStopCondition, InterfaceStopCondition
 
 
 class BFGS(InterfaceMethodOptim):
 
-    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition,
-                 tensorboard_writer: SummaryWriter):
-        super().__init__(X, y, function, stop_condition, tensorboard_writer)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         F = self._w.shape[0]
         self._C = np.identity(F)
         self._grad = self._function.loss_gradient(self._w, self._X, self._y)
@@ -69,7 +66,7 @@ class BFGS(InterfaceMethodOptim):
         divider1 = y.T.dot(s).item()
         # BAD SMELL
         assert divider1 != 0
-        ro = 1 / divider1   # (1, 1)
+        ro = 1 / divider1  # (1, 1)
 
         first1 = I - ro * s.dot(y.T)  # (F, F)
         first2 = I - ro * y.dot(s.T)  # (F, F)

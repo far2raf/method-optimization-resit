@@ -43,10 +43,15 @@ class InterfaceOptimAnswer:
 
 class InterfaceMethodOptim:
 
-    def __init__(self, X, y,
+    def __init__(self,
+                 X,
+                 y,
                  function: InterfaceFunction,
                  stop_condition: InterfaceStopCondition,
-                 tensorboard_writer: SummaryWriter):
+                 tensorboard_writer: SummaryWriter,
+                 eps_for_zero_division: float
+                 ):
+        self._eps_for_zero_division = eps_for_zero_division
         assert len(X.shape) == 2
         num_of_samples, num_of_features = X.shape
         assert y.shape == (num_of_samples, 1)

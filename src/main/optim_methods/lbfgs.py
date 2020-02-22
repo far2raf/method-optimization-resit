@@ -1,21 +1,16 @@
-# MOCK. now it's copy of BFGS
-
 import numpy as np
-import scipy.optimize
-from torch.utils.tensorboard import SummaryWriter
 
-from src.main.functions.interface_function import InterfaceFunction
 from src.main.optim_methods.interface_method_optim import InterfaceMethodOptim, InterfaceOptimAnswer
 from src.main.stop_conditions.common import NumIterStopCondition, InterfaceStopCondition
 
 
 class LBFGS(InterfaceMethodOptim):
 
-    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition,
-                 tensorboard_writer: SummaryWriter,
-                 size: int
+    def __init__(self, *args,
+                 size: int,
+                 **kwargs
                  ):
-        super().__init__(X, y, function, stop_condition, tensorboard_writer)
+        super().__init__(*args, **kwargs)
         self._size = size
         F = self._w.shape[0]
         self._buffer_H = []
@@ -63,7 +58,7 @@ class LBFGS(InterfaceMethodOptim):
         g = self._buffer_grad
         q = g[k]
 
-        for i in range(k-1, k-m-1, -1):
+        for i in range(k - 1, k - m - 1, -1):
             alpha[i] = ro[i] * s[i].T.dot(q).item()
             q = q - alpha[i] * y[i]
 

@@ -1,13 +1,8 @@
-from src.main.functions.interface_function import InterfaceFunction
 from src.main.optim_methods.interface_method_optim import InterfaceMethodOptim, InterfaceOptimAnswer
 from src.main.optim_methods.utils import get_lr
-from src.main.stop_conditions.common import InterfaceStopCondition
 
 
 class GradientDescent(InterfaceMethodOptim):
-
-    def __init__(self, X, y, function: InterfaceFunction, stop_condition: InterfaceStopCondition, *args, **kwargs):
-        super().__init__(X, y, function, stop_condition, *args, **kwargs)
 
     def step(self):
         grad = self._function.loss_gradient(self._w, self._X, self._y)

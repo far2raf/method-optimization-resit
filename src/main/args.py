@@ -36,7 +36,7 @@ argument_parser.add_argument("--optim_method",
                              # default="lbfgs"
                              # default="adam"
                              # default="l1prox"
-)
+                             )
 
 # line_search_method = {'golden_search', 'brent', 'armijo', 'wolfe', 'lipschitz'}
 line_search_methods = {"MOCK"}  # MOCK. maybe should be only brent and set it like default
@@ -56,9 +56,16 @@ argument_parser.add_argument("--no_use_num_stop_condition", action="store_true")
 argument_parser.add_argument("--max_num_iter", type=int)
 argument_parser.add_argument("--no_use_tqdm", action="store_true")
 
-
+# only for lbfgs
 argument_parser.add_argument("--lbfgs_history_size", type=int, default=10,
                              help="optional for L-BFGS method; number of entries in history.")
+
+# only for adam
+argument_parser.add_argument("--betta1", type=float, default=0.9)
+argument_parser.add_argument("--betta2", type=float, default=0.999)
+argument_parser.add_argument("--lr", type=float, default=0.0001)
+
+argument_parser.add_argument("--eps_for_zero_division", type=float, default=1e-8)
 
 # MOCK
 # --point_distribution: string; initial weights distribution class, will be one of {'uniform', 'gaussian'}. In case of uniform its parameters must be (-1, 1) and in case of gaussian its parameters must be (0, $\sqrt{10}$).

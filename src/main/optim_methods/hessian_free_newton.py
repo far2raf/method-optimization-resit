@@ -6,6 +6,7 @@ from src.main.stop_conditions.common import InterfaceStopCondition, NumIterStopC
 
 
 class HessianFreeNewton(InterfaceMethodOptim):
+
     def step(self):
         S, F = self._X.shape
         grad = self._function.loss_gradient(self._w, self._X, self._y)
