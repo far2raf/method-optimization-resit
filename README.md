@@ -37,6 +37,13 @@ src/main/main.py
 ## Постановка задачи
 ./task.pdf
 
+## Простой способ проверить, что что-то работает
+
+PYTHONPATH="." python src/generate_dataset/generate_dataset.py --function_name poisson_regression --use_save_args_settings
+
+PYTHONPATH="." python src/main/main.py --function_name poisson_regression --optim_method adam --use_save_args_settings
+
+
 
 # Примечания
 Так как мы рассматриваем пуассоновскую регрессию, 
