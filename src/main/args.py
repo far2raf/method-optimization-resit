@@ -57,7 +57,7 @@ argument_parser.add_argument("--max_num_iter", type=int)
 argument_parser.add_argument("--no_use_tqdm", action="store_true")
 
 
-argument_parser.add_argument("--lbfgs-history-size", type=int, default=0,
+argument_parser.add_argument("--lbfgs_history_size", type=int, default=10,
                              help="optional for L-BFGS method; number of entries in history.")
 
 # MOCK

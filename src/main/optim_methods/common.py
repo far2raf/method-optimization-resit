@@ -5,8 +5,8 @@ from src.main.optim_methods.lbfgs import LBFGS
 from src.main.optim_methods.newton import Newton
 
 
-def get_opt_method_maker(args, tensorboard_writer):
-    name = args.optim_method
+def get_opt_method_maker(program_running_arguments, tensorboard_writer):
+    name = program_running_arguments.optim_method
     if name == "gradient":
         return lambda *args: GradientDescent(*args, tensorboard_writer=tensorboard_writer)
     elif name == "newton":
@@ -16,7 +16,10 @@ def get_opt_method_maker(args, tensorboard_writer):
     elif name == "bfgs":
         return lambda *args: BFGS(*args, tensorboard_writer=tensorboard_writer)
     elif name == "lbfgs":
-        return lambda *args: LBFGS(*args, tensorboard_writer=tensorboard_writer)
+        return lambda *args: LBFGS(*args,
+                                   tensorboard_writer=tensorboard_writer,
+                                   size=program_running_arguments.lbfgs_history_size
+                                   )
     elif name == "adam":
         raise RuntimeError("MOCK, not realized yet")
     elif name == "l1prox":
