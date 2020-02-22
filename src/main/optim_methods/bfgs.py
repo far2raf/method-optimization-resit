@@ -64,9 +64,7 @@ class BFGS(InterfaceMethodOptim):
         y = grad_next - grad  # (F, 1)
 
         divider1 = y.T.dot(s).item()
-        # BAD SMELL
-        assert divider1 != 0
-        ro = 1 / divider1  # (1, 1)
+        ro = 1 / (divider1 + self._eps_for_zero_division)  # (1, 1)
 
         first1 = I - ro * s.dot(y.T)  # (F, F)
         first2 = I - ro * y.dot(s.T)  # (F, F)

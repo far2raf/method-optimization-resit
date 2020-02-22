@@ -51,14 +51,16 @@ class HessianFreeNewton(InterfaceMethodOptim):
         d = r  # search direction
         stop_condition = self._get_stop_condition(F=F)
         while not stop_condition.finish(x):
+
             divider1 = d.T.dot(A).dot(d)
-            assert divider1.item() != 0  # MOCK. strange check, better with some eps
-            alpha = r.T.dot(r) / divider1  # (1, 1)
+            alpha = r.T.dot(r) / (divider1 + self._eps_for_zero_division) # (1, 1)
+
             x_next = x + d.dot(alpha)
             r_next = r - A.dot(d).dot(alpha)
+
             divider2 = r.T.dot(r)
-            assert divider2.item() != 0  # MOCK. strange check, better with some eps
-            betta = r_next.T.dot(r_next) / divider2
+            betta = r_next.T.dot(r_next) / (divider2 + self._eps_for_zero_division)
+
             d_next = r_next + d.dot(betta)
 
             x = x_next

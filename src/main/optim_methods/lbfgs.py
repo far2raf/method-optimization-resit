@@ -64,9 +64,7 @@ class LBFGS(InterfaceMethodOptim):
 
         if k != 0:
             divider1 = y[k - 1].T.dot(y[k - 1]).item()
-            # BAD SMELL
-            assert divider1 != 0
-            gamma = s[k - 1].T.dot(y[k - 1]).item() / divider1
+            gamma = s[k - 1].T.dot(y[k - 1]).item() / (divider1 + self._eps_for_zero_division)
         else:
             gamma = 1
 
@@ -82,8 +80,6 @@ class LBFGS(InterfaceMethodOptim):
         new_grad = self._function.loss_gradient(new_w, self._X, self._y)
         new_y = new_grad - g[-1]
         divider2 = new_y.T.dot(new_s)
-        # BAD SMELL
-        assert divider2 != 0
-        new_ro = 1 / divider2
+        new_ro = 1 / (divider2 + self._eps_for_zero_division)
 
         return new_w, new_grad, new_H0, new_s, new_y, new_ro
