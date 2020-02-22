@@ -5,8 +5,8 @@ from src.main.functions.interface_function import InterfaceFunction
 
 
 class PoissonRegression(InterfaceFunction):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         # В формулах в задании и на вики почему-то максимизирует loss
         # Для наглядности сделан специальный параметр меняющий выражения для минимизации
         self._maximization_to_minimization = -1

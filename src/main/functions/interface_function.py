@@ -10,10 +10,9 @@ class InterfaceFunction:
         y - S:1
     """
 
-    def __init__(self):
-        # BAD SMELL
-        self._l1 = 0.0
-        self._l2 = 0.0
+    def __init__(self, l1, l2):
+        self._l1 = l1
+        self._l2 = l2
 
     def function(self, w, X):
         assert len(X.shape) != 2

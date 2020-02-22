@@ -3,8 +3,8 @@ from src.main.functions.interface_function import InterfaceFunction
 
 class Linear(InterfaceFunction):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def _function(self, w, X):
         return X.dot(w)

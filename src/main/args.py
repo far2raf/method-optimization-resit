@@ -67,6 +67,10 @@ argument_parser.add_argument("--lr", type=float, default=0.0001)
 
 argument_parser.add_argument("--eps_for_zero_division", type=float, default=1e-8)
 
+# l1 l2 params
+argument_parser.add_argument("--l1", type=float, default=0)
+argument_parser.add_argument("--l2", type=float, default=0)
+
 # MOCK
 # --point_distribution: string; initial weights distribution class, will be one of {'uniform', 'gaussian'}. In case of uniform its parameters must be (-1, 1) and in case of gaussian its parameters must be (0, $\sqrt{10}$).
 # --seed: int; seed for numpy randomness.
