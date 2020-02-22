@@ -1,5 +1,7 @@
+import os
+
 import numpy as np
-import scipy
+import scipy.sparse
 from sklearn import datasets
 
 
@@ -11,7 +13,10 @@ def load_dataset(args):
 
 
 def store_dataset(X, y, w, args):
-    path = f"{args.data_folder}/{args.function_name}"
+    folder = f"{args.data_folder}"
+    path = f"{folder}/{args.function_name}"
+    if not os.path.exists(folder):
+        os.mkdir(folder)
     datasets.dump_svmlight_file(X, y.squeeze(), f"{path}.svm")
     np.save(f"{path}.npy", w)
 

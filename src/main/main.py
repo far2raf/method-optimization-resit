@@ -10,9 +10,8 @@ from src.main.optim_methods import get_opt_method_maker
 from src.main.stop_conditions.common import get_stop_condition
 
 if __name__ == "__main__":
-
     args = argument_parser.parse_args()
-    if not args.no_use_save_args_settings:
+    if args.use_save_args_settings:
         load_args_settings(args)
     random.seed(args.seed)
     np.random.seed(args.seed)

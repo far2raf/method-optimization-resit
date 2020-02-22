@@ -13,7 +13,7 @@ def load_args_settings(args):
 argument_parser = argparse.ArgumentParser()
 
 # args settings
-argument_parser.add_argument("--no_use_save_args_settings", action="store_true")
+argument_parser.add_argument("--use_save_args_settings", action="store_true")
 argument_parser.add_argument("--args_settings_folder", type=str, default="src/main/args_settings")
 
 # common
@@ -46,7 +46,7 @@ argument_parser.add_argument("--line_search",
                                   f"Note that you don't have to support a combination of 'newton' nor 'hfn' nor any 'bfgs' optimization method and 'lipschitz' linear search.")
 
 # eps stop condition
-eps_stop_condition_methods = {"none", "eps_between_param"}
+eps_stop_condition_methods = {"none", "eps_between_param"}  # MOCK. eps_between_param without Testing
 argument_parser.add_argument("--type_of_eps_stop_condition", choices=eps_stop_condition_methods, type=str,
                              default="none")
 argument_parser.add_argument("--eps_stop_condition", type=float, default=0.00001)

@@ -7,7 +7,8 @@ from src.generate_dataset.dataset_processing import generate_dataset, store_data
 
 if __name__ == "__main__":
     args = argument_parser.parse_args()
-    load_args_settings(args)
+    if args.use_save_args_settings:
+        load_args_settings(args)
     random.seed(args.seed)
     np.random.seed(args.seed)
     X, y, w = generate_dataset(args)
