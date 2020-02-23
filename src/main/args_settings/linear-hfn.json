@@ -1,5 +1,3 @@
 {
-  "max_num_iter": 100000,
-  "type_of_eps_stop_condition": "eps_between_param",
-  "eps_stop_condition": 0.01
+  "max_num_iter": 100
 }
