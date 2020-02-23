@@ -50,7 +50,7 @@ class LBFGS(InterfaceMethodOptim):
         m = min(self._size, k)
 
         alpha = [0] * k
-        betta = [0] * k
+        beta = [0] * k
         H0 = self._buffer_H
         s = self._buffer_s
         y = self._buffer_y
@@ -71,8 +71,8 @@ class LBFGS(InterfaceMethodOptim):
         new_H0 = gamma * I
         z = new_H0.dot(q)
         for i in range(k - m, k, 1):
-            betta[i] = ro[i] * y[i].T.dot(z).item()
-            z = z + s[i] * (alpha[i] - betta[i])
+            beta[i] = ro[i] * y[i].T.dot(z).item()
+            z = z + s[i] * (alpha[i] - beta[i])
 
         new_z = z
         new_w = self._w - new_z

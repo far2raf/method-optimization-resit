@@ -59,9 +59,9 @@ class HessianFreeNewton(InterfaceMethodOptim):
             r_next = r - A.dot(d).dot(alpha)
 
             divider2 = r.T.dot(r)
-            betta = r_next.T.dot(r_next) / (divider2 + self._eps_for_zero_division)
+            beta = r_next.T.dot(r_next) / (divider2 + self._eps_for_zero_division)
 
-            d_next = r_next + d.dot(betta)
+            d_next = r_next + d.dot(beta)
 
             x = x_next
             r = r_next

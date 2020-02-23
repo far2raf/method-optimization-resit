@@ -61,8 +61,8 @@ argument_parser.add_argument("--lbfgs_history_size", type=int, default=10,
                              help="optional for L-BFGS method; number of entries in history.")
 
 # only for adam
-argument_parser.add_argument("--betta1", type=float, default=0.9)
-argument_parser.add_argument("--betta2", type=float, default=0.999)
+argument_parser.add_argument("--beta1", type=float, default=0.9)
+argument_parser.add_argument("--beta2", type=float, default=0.999)
 argument_parser.add_argument("--lr", type=float, default=0.0001)
 
 argument_parser.add_argument("--eps_for_zero_division", type=float, default=1e-8)

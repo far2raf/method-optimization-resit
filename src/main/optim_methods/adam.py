@@ -7,15 +7,15 @@ from src.main.stop_conditions.common import NumIterStopCondition, InterfaceStopC
 class Adam(InterfaceMethodOptim):
 
     def __init__(self, *args,
-                 betta1: float,
-                 betta2: float,
+                 beta1: float,
+                 beta2: float,
                  lr: float,
                  **kwargs
                  ):
         super().__init__(*args, **kwargs)
         F = self._w.shape[0]
-        self._betta1 = betta1
-        self._betta2 = betta2
+        self._beta1 = beta1
+        self._beta2 = beta2
         self._mw = np.zeros((F, 1))
         self._uw = np.zeros((F, 1))
         self._lr = lr
@@ -41,17 +41,17 @@ class Adam(InterfaceMethodOptim):
         """
         https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Adam
         """
-        betta1 = self._betta1
-        betta2 = self._betta2
+        beta1 = self._beta1
+        beta2 = self._beta2
         eta = self._lr
         mw = self._mw
         uw = self._uw
 
-        new_mw = betta1 * mw + (1 - betta1) * grad
-        new_uw = betta2 * uw + (1 - betta2) * grad ** 2
+        new_mw = beta1 * mw + (1 - beta1) * grad
+        new_uw = beta2 * uw + (1 - beta2) * grad ** 2
 
-        _mw = new_mw / (1 - betta1)
-        _uw = new_uw / (1 - betta2)
+        _mw = new_mw / (1 - beta1)
+        _uw = new_uw / (1 - beta2)
 
         new_w = w - eta * _mw / np.sqrt(_uw + self._eps_for_zero_division)
 
