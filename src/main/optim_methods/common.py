@@ -30,7 +30,6 @@ def get_opt_method_maker(program_running_arguments, tensorboard_writer):
         return lambda *args: Adam(*args,
                                   betta1=program_running_arguments.betta1,
                                   betta2=program_running_arguments.betta2,
-                                  lr=program_running_arguments.lr,
                                   **common_kwargs
                                   )
     elif name == "l1prox":
