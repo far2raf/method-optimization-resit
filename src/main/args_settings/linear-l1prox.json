@@ -1,3 +1,4 @@
 {
-  "max_num_iter": 100
+  "max_num_iter": 20000,
+  "l1": 0.01
 }

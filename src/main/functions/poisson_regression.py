@@ -1,5 +1,5 @@
 import numpy as np
-import scipy
+import scipy.sparse
 
 from src.main.functions.interface_function import InterfaceFunction
 
@@ -25,14 +25,13 @@ class PoissonRegression(InterfaceFunction):
         total = self._maximization_to_minimization * main + self._loss_regularization_part(w)
         return total
 
-    def _loss_gradient(self, w, X, y):
+    def _loss_pure_gradient(self, w, X, y):
         S, F = X.shape
         xw = X.dot(w)
         exp_part = np.exp(xw)
         diff = y - exp_part
         main = 1 / S * X.T.dot(diff)
-        total = self._maximization_to_minimization * main + self._loss_gradient_regularization_part(w)
-        return total
+        return self._maximization_to_minimization * main
 
     def _loss_hessian(self, w, X, y):
         xw = X.dot(w)

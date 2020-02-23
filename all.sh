@@ -10,6 +10,7 @@ opt=(
     adam
     bfgs
     lbfgs
+    l1prox
 )
 for j in "${opt[@]}"; do
     for i in "${func_name[@]}"; do

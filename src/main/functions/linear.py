@@ -16,13 +16,12 @@ class Linear(InterfaceFunction):
         total = main + self._loss_regularization_part(w)
         return total
 
-    def _loss_gradient(self, w, X, y):
+    def _loss_pure_gradient(self, w, X, y):
         S = X.shape[0]
         diff = X.dot(w) - y
         coef = 2 / S
         main = coef * X.T * diff
-        total = main + self._loss_gradient_regularization_part(w)
-        return total
+        return main
 
     def _loss_hessian(self, w, X, y):
         S = X.shape[0]
