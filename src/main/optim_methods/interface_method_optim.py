@@ -28,7 +28,7 @@ class InterfaceOptimAnswer:
     def get_gradient_loss_value(self):
         raise RuntimeError("Method should be overridden")
 
-    def get_stopping_criterian(self):
+    def get_stopping_criterion(self):
         raise RuntimeError("Method should be overridden")
 
     def get_num_nonzero_components(self):
