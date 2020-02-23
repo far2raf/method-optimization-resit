@@ -30,11 +30,11 @@ def get_opt_method_maker(program_running_arguments, tensorboard_writer):
         return lambda *args: Adam(*args,
                                   beta1=program_running_arguments.beta1,
                                   beta2=program_running_arguments.beta2,
+                                  lr=program_running_arguments.lr,
                                   **common_kwargs
                                   )
     elif name == "l1prox":
         return lambda *args: L1Prox(*args,
-                                    lr=program_running_arguments.lr,
                                     **common_kwargs)
     else:
         raise RuntimeError(f"Optim method {name} undefined")
