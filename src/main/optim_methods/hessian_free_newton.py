@@ -26,7 +26,7 @@ class HessianFreeNewton(InterfaceMethodOptim):
     def get_answer(self):
         return InterfaceOptimAnswer(self._w_start, self._w, self._function)
 
-    # MOCK. may be should be rewritten
+    # MOCK. probably should be rewritten
     def _get_stop_condition(self, F) -> InterfaceStopCondition:
         return NumIterStopCondition(F)
 

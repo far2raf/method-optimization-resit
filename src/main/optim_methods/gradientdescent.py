@@ -7,7 +7,7 @@ class GradientDescent(InterfaceMethodOptim):
     def step(self):
         grad = self._function.loss_gradient(self._w, self._X, self._y)
         assert grad.shape == self._w.shape
-        # May be there bounds write like BAD SMELL
+        # probably there bounds write like BAD SMELL
         direction = grad
         lr = get_lr(self._w, direction, self._X, self._y, self._function, max_bound=1)
         self._w -= lr * direction
