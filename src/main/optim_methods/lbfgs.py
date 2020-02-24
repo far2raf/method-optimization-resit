@@ -66,7 +66,8 @@ class LBFGS(InterfaceMethodOptim):
             divider1 = y[k - 1].T.dot(y[k - 1]).item()
             gamma = s[k - 1].T.dot(y[k - 1]).item() / (divider1 + self._eps_for_zero_division)
         else:
-            gamma = 1
+            # BAD SMELL
+            gamma = 0.001
 
         new_H0 = gamma * I
         z = new_H0.dot(q)
