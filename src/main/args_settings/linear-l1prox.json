@@ -1,4 +1,4 @@
 {
-  "max_num_iter": 100,
+  "max_num_iter": 400,
   "l1": 0.01
 }
